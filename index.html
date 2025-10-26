@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Golden Republic - Polish Futurism</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 50%, #16213e 100%);
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(218, 165, 32, 0.03) 2px, rgba(218, 165, 32, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(218, 165, 32, 0.03) 2px, rgba(218, 165, 32, 0.03) 4px);
+            animation: gridMove 20s linear infinite;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .eagle-emblem {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .eagle-emblem::before {
+            content: '🦅';
+            font-size: 80px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: drop-shadow(0 0 30px rgba(218, 165, 32, 0.6));
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #DAA520 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            animation: glow 2s ease-in-out infinite alternate;
+            word-wrap: break-word;
+            max-width: 100%;
+        }
+        
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5)); }
+            to { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8)); }
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #c0c0c0;
+            margin-bottom: 3rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #FFD700;
+            font-weight: 700;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-top: 0.5rem;
+        }
+        
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+        
+        .section:nth-child(even) {
+            background: linear-gradient(180deg, #0a0a0a 0%, #121212 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #FFD700;
+            margin-bottom: 3rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid rgba(218, 165, 32, 0.3);
+            border-radius: 15px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(218, 165, 32, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(218, 165, 32, 0.8);
+            box-shadow: 0 20px 40px rgba(218, 165, 32, 0.3);
+        }
+        
+        .card:hover::before {
+            opacity: 1;
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px rgba(218, 165, 32, 0.5));
+        }
+        
+        .card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .card p {
+            color: #c0c0c0;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+            word-wrap: break-word;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, transparent, #FFD700, transparent);
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+        
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-content {
+            width: 45%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid rgba(218, 165, 32, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            word-wrap: break-word;
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #FFD700;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+        
+        .timeline-phase {
+            font-family: 'Orbitron', sans-serif;
+            color: #FFD700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        
+        .timeline-years {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            position: relative;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(218, 165, 32, 0.1) 0%, transparent 70%);
+        }
+        
+        .cta h2 {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta p {
+            font-size: 1.3rem;
+            color: #c0c0c0;
+            max-width: 800px;
+            margin: 2rem auto;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .polish-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            opacity: 0.05;
+            background: repeating-linear-gradient(
+                45deg,
+                #FFD700,
+                #FFD700 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .stats {
+                gap: 2rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                flex-direction: column !important;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 40px;
+            }
+            
+            .timeline-marker {
+                left: 20px;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <div class="eagle-emblem"></div>
+            <h1>Złota Rzeczpospolita</h1>
+            <p class="subtitle">The Golden Republic</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">515+</div>
+                    <div class="stat-label">Tonnes Gold</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">22%</div>
+                    <div class="stat-label">Reserve Assets</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">2030</div>
+                    <div class="stat-label">Target Year</div>
+                </div>
+            </div>
+        </div>
+        <div class="polish-pattern"></div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>The Vision</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #c0c0c0; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                Poland stands at a historic crossroads. To cement its position as a world leader and architect of a new European civilisation, the country must transition toward a gold-backed monetary system—creating a Polish Golden Era and laying the foundation for <strong style="color: #FFD700;">Polish Futurism</strong>.
+            </p>
+            
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">🛡️</div>
+                    <h3>Economic Sovereignty</h3>
+                    <p>A gold-backed złoty reduces exposure to external fiat currency manipulation. Monetary policy rooted in hard assets enforces discipline and prevents inflationary erosion of wealth.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">📈</div>
+                    <h3>Sound Economics</h3>
+                    <p>Based on Austrian principles, sound money rewards thrift, patience, and entrepreneurship. Deflation reflects productivity gains, fostering durable industrial and technological development.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🏛️</div>
+                    <h3>Civilisational Growth</h3>
+                    <p>Monetary stability enables investment in infrastructure, technology, and education. Forms the cultural and economic backbone for a disciplined, technologically sovereign society.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Implementation Roadmap</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Phase 1</div>
+                        <div class="timeline-years">1-2 Years</div>
+                        <p>Legislative groundwork and institutional setup. Amend NBP statutes to allow gold-backed peg. Introduce statutory limits on money supply growth linked to gold reserves.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Phase 2</div>
+                        <div class="timeline-years">3-5 Years</div>
+                        <p>Partial gold convertibility for institutional investors and high-value transactions. Continue aggressive gold acquisition toward 30% reserve target.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Phase 3</div>
+                        <div class="timeline-years">5 Years</div>
+                        <p>Public-facing gold-linked savings instruments. Full integration into national financial system. Poland becomes regional monetary anchor.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Expected Outcomes</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">👑</div>
+                    <h3>The Golden Era</h3>
+                    <p>Poland becomes a regional and global model for monetary sovereignty and economic resilience. Long-term growth is productivity-driven rather than debt-driven.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3>Polish Futurism</h3>
+                    <p>Infrastructure, technology, and culture flourish under disciplined economic conditions. Emergence of a socio-economic and cultural movement emphasizing innovation and quality.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🌍</div>
+                    <h3>Geopolitical Power</h3>
+                    <p>Poland gains autonomy from ECB influence, strengthening international negotiation positions. Enhanced credibility attracts investment and partnerships worldwide.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">💰</div>
+                    <h3>Rising Prosperity</h3>
+                    <p>Citizens experience rising real wages as deflation enhances purchasing power. Savings are rewarded, and long-term investment becomes the cultural norm.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta">
+        <h2>A Civilisational Design</h2>
+        <p>
+            Poland's transition toward a gold-backed monetary system is not merely a financial strategy—it is an act of civilisational design. By embedding discipline, ethical finance, and technological foresight into its economy, Poland can usher in a Golden Era and realize the vision of Polish Futurism.
+        </p>
+        <p style="margin-top: 2rem; font-size: 1.5rem; color: #FFD700; font-family: 'Orbitron', sans-serif;">
+            The future is golden. The future is Polish.
+        </p>
+    </div>
+</body>
+</html>
